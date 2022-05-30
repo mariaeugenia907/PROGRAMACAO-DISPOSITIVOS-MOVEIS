@@ -2,27 +2,24 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
 class Informacoes extends Equatable {
+  final int id;
   final String name;
-  final String url;
-  final int mass;
+  final String gender;
 
   Informacoes({
+    required this.id,
   required this.name,
-    required this.url,
-    required this.mass,
+    required this.gender,
+
 });
 
-factory Informacoes.fromJson(Map<String, dynamic> json) => Informacoes(
-name: json["name"],
-url: json["url"],
-mass: json["mass"],
-);
 
 Map<String, dynamic> toJson() => {
+  "id": id,
   "name": name,
-  "url": url,
-  "mass": mass,
+  "url": gender,
+
 };
 @override
-List<Object?> get props => [name, url, mass];
+List<Object?> get props => [id, name, gender];
 }

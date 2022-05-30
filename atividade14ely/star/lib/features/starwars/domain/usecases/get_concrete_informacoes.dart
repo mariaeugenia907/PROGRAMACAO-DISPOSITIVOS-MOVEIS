@@ -10,7 +10,7 @@ class GetConcreteInformacoes{
   GetConcreteInformacoes(this.repository);
 
   @override
-  Future<Either<Failure, List<Informacoes>>?> call() async {
+  Future<Either<Failure, Informacoes>> call() async {
     return await repository.getConcreteInformacoes();
   }
 }

@@ -7,33 +7,30 @@ import 'package:star/features/starwars/domain/entities/informacoes.dart';
 import 'package:star/features/starwars/domain/repositories/informacoes_repository.dart';
 import 'package:star/features/starwars/domain/usecases/get_concrete_informacoes.dart';
 
-@GenerateMocks([InformacoesRepository])
+class MockInformacoesRepository extends Mock implements InformacoesRepository {}
+
 void main() {
-  final mockInformacoesRepository = MockInformacoesRepository;
-  late GetConcreteInformacoes usecase;
+  GetConcreteInformacoes usecase;
+  MockInformacoesRepository mockInformacoesRepository;
 
-  setUp(() {
-    usecase = GetConcreteInformacoes(mockInformacoesRepository);
-
-  });
-
-  final Informacao = Informacoes(
-    name: 'name',
-    url: 'url', mass: 1,
-
+  final informeEx = Informacoes(
+    id: 1,
+    name: 'Luke Skywalker',
+    gender: 'male',
   );
 
-final mass =1;
+  test('should return informacoes', () async {
+    mockInformacoesRepository = MockInformacoesRepository();
 
-  test('Shoul return a single character', () async {
-    when(() => mockInformacoesRepository.getNumCharacter(mass))
-        .thenAnswer((_) async => Right(mass));
+    when(mockInformacoesRepository.getConcreteInformacoes())
+        .thenAnswer((_) async => Right(informeEx));
 
-    final result = await usecase.call(mass);
+    usecase = GetConcreteInformacoes(mockInformacoesRepository);
 
-    expect(result, Right(mass));
+    final result = await usecase.call();
+    expect(result, Right(informeEx));
 
-    verify(() => mockInformacoesRepository.getNumCharacter(mass));
+    verify(mockInformacoesRepository.getConcreteInformacoes());
     verifyNoMoreInteractions(mockInformacoesRepository);
   });
 }

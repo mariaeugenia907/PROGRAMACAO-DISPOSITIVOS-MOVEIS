@@ -10,7 +10,7 @@ class GetNumInformacoes {
   GetNumInformacoes(this.repository);
 
   @override
-  Future<Either<Failure, Informacoes>> call(int mass) async {
-    return await repository.getNumCharacter(mass);
+  Future<Either<Failure, Informacoes?>> call(int id) async {
+    return await repository.getNumInformacoes(id);
   }
 }
